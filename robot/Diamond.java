@@ -4,6 +4,12 @@ import kareltherobot.*;
 
 public class Diamond implements Directions{
 
+    public static void turnRight(Robot r){
+        for (int i = 0; i<3; i++) {
+            r.turnLeft();
+        }
+    }
+
     public static void main(String[] args) {
 
         World.setVisible(true);// allows us to see the run output
@@ -23,32 +29,21 @@ public class Diamond implements Directions{
         //rob.move();// move one step in the direction it is facing
 
         rob.putBeeper();
+        for (int i = 0; i < 2; i++) {
+            rob.move();
+            rob.turnLeft();
+            rob.move();
+            rob.putBeeper();
+            Diamond.turnRight(rob);
+        }
+        for (int i = 0; i < 2; i++) {
+            rob.move();
+            rob.turnLeft();
+            rob.move();
+            rob.putBeeper();
+        }
         rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.move();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.turnLeft();
+        Diamond.turnRight(rob);
         rob.move();
         rob.putBeeper();
         rob.move();
@@ -56,31 +51,20 @@ public class Diamond implements Directions{
         rob.move();
         rob.putBeeper();
         //top sides
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.move();
-        rob.turnLeft();
-        rob.move();
-        rob.putBeeper();
-        rob.turnLeft();
-        rob.turnLeft();
-        rob.turnLeft();
+        for (int i = 0; i < 2; i++) {
+            rob.move();
+            rob.turnLeft();
+            rob.move();
+            rob.putBeeper();
+            Diamond.turnRight(rob);
+        }
+        for (int i = 0; i < 2; i++) {
+            rob.move();
+            rob.turnLeft();
+            rob.move();
+            rob.putBeeper();
+        }
+        Diamond.turnRight(rob);
         rob.move();
         rob.turnLeft();
         rob.move();
