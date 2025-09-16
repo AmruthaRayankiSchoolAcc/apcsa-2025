@@ -25,11 +25,12 @@ public class Roomba implements Directions {
 
 		// A new Robot should be constructed and assigned to the global (instance) variable named roomba that is declared above.
         // Make sure it starts at startX and startY location.
-		Robot robot = new Robot(startX, startY, South, 50);
+		Robot robot = new Robot(startX, startY, South, 0);
 
 		//creates the world for the robot to clean
 		World.readWorld(worldName);
 		World.setVisible(true);
+		World.setDelay(10);
 
 		int totalBeepers = 0; // Need to move this somewhere else.
 
@@ -37,17 +38,73 @@ public class Roomba implements Directions {
 		 * and cleans up all piles of beepers. Think about ways you can break this
 		 * large, complex task into smaller, easier to solve problems.
 		 */
+		// robot start moving
+		robot.turnLeft(); 
+		// repeating code: function to clear the row
+		while(robot.frontIsClear()) {
+			robot.move();
+			while(robot.nextToABeeper()) {
+				robot.pickBeeper();
+				totalBeepers++;
+			}
+		}
+		// in-between while loop, the code for robot to move to next row when turning left
 		robot.turnLeft();
 		robot.move();
+		robot.turnLeft();
+		// repeating code: function to clear the row
+		while(robot.frontIsClear()) {
+			robot.move();
+			while(robot.nextToABeeper()) {
+				robot.pickBeeper();
+				totalBeepers++;
+			}
+		}
+		// code for robot to move to next row when turning right
+		robot.turnLeft();
+		robot.turnLeft();
+		robot.turnLeft();
 		robot.move();
-		robot.pickBeeper();
-		totalBeepers++;
-		
+		robot.turnLeft();
+		robot.turnLeft();
+		robot.turnLeft();
+		// repeating code: function to clear the row
+		while(robot.frontIsClear()) {
+			robot.move();
+			while(robot.nextToABeeper()) {
+				robot.pickBeeper();
+				totalBeepers++;
+			}
+		}
+		// code for robot to move to next row moving left
+		robot.turnLeft();
+		robot.move();
+		robot.turnLeft();
+		// repeating code: function to clear the row
+		while(robot.frontIsClear()) {
+			robot.move();
+			while(robot.nextToABeeper()) {
+				robot.pickBeeper();
+				totalBeepers++;
+			}
+		}
+		// code for robot to move to next row when turning right
+		robot.turnLeft();
+		robot.turnLeft();
+		robot.turnLeft();
+		robot.move();
+		robot.turnLeft();
+		robot.turnLeft();
+		robot.turnLeft();
+		// repeating code: function to clear the row
+		while(robot.frontIsClear()) {
+			robot.move();
+			while(robot.nextToABeeper()) {
+				robot.pickBeeper();
+				totalBeepers++;
+			}
+		}
 
-		// the line below causes a null pointer exception
-		// what is that and why are we getting it?
-		// roomba.move();
-		// before the object was not created
 
 
         // This method should return the total number of beepers cleaned up.
