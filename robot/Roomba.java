@@ -4,6 +4,7 @@ import kareltherobot.*;
 
 public class Roomba implements Directions {
 
+	int squareCount = 0;
 	int totalBeepers = 0;
 	int totalPiles = 0;
 	int maximumBeepersPerPile = 0;
@@ -27,6 +28,7 @@ public class Roomba implements Directions {
 	public void cleanRow(Robot r) {
 		while(r.frontIsClear()) {
 			r.move();
+			squareCount++;
 			if (r.nextToABeeper()) {
 				int totalBeepersPerPile = 0;
 				while(r.nextToABeeper()) {
@@ -96,6 +98,7 @@ public class Roomba implements Directions {
 		System.out.println("Total number of piles: " + totalPiles);
 		System.out.println(largestPile + " is the largest pile in the total number of piles " + totalPiles);
 		System.out.println("Largest pile location is " + "street " + largestPileStreet + " avenue " + largestPileAvenue);
+		System.out.println("Area is " + squareCount);
         // This method should return the total number of beepers cleaned up.
 		return totalBeepers;
 	}
