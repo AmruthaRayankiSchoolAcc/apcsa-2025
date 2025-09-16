@@ -163,6 +163,9 @@ public class Starter implements Directions{
     rob.turnLeft();
     rob.move();
     rob.putBeeper();
+    /*if (rob.nextToABeeper() == true) {
+      rob.pickBeeper();
+    } */
     rob.move(); 
 
 
