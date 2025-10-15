@@ -29,13 +29,34 @@ public class PigLatinTranslator {
     private static String translateWord(String input) {
         System.out.println("  -> translateWord('" + input + "')");
 
-        String result = "";
 
         // TODO: Replace this code to correctly translate a single word.
         // Start here first!
         // This is the first place to work.
-        result = input; // delete this line
+        boolean startWithe = input.substring(0,1).equals("e");
+        boolean startWithE = input.substring(0,1).equals("E");
+        boolean startWitha = input.substring(0,1).equals("a");
+        boolean startWithA = input.substring(0,1).equals("A");
+        boolean startWithi = input.substring(0,1).equals("i");
+        boolean startWithI = input.substring(0,1).equals("I");
+        boolean startWitho = input.substring(0,1).equals("o");
+        boolean startWithO = input.substring(0,1).equals("O");
+        boolean startWithu = input.substring(0,1).equals("u");
+        boolean startWithU = input.substring(0,1).equals("U");
 
+        //private boolean isVowel(c) {
+
+        //}
+        if (startWitha == true || startWithA == true || startWithe == true || startWithE == true || startWithi == true || startWithI == true || startWitho == true || startWithO == true || startWithu == true || startWithU == true) {
+            return input + "ay";
+        }
+        else {
+            for (int i = 0; i < input.length(); i++) {
+                input.charAt(i) 
+            }
+        }
+        
+        String result = input;
         return result;
     }
 
