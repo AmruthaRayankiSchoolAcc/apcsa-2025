@@ -44,6 +44,7 @@ public class PigLatinTranslator {
         boolean startWithu = input.substring(0,1).equals("u");
         boolean startWithU = input.substring(0,1).equals("U");
 
+
         //private boolean isVowel(c) {
 
         //}
@@ -52,7 +53,7 @@ public class PigLatinTranslator {
         }
         else {
             for (int i = 0; i < input.length(); i++) {
-                input.charAt(i) 
+                input.charAt(i);
             }
         }
         
