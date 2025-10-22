@@ -28,7 +28,7 @@ public class PigLatinTranslator {
 
     private static String translateWord(String input) {
         String result;
-        int endIndex = 0;
+        int endIndex = 1;
         String vowels = "aeiouyAEIOUY";
         System.out.println("  -> translateWord('" + input + "')");
 
@@ -61,13 +61,14 @@ public class PigLatinTranslator {
         }
         else {
             for (int i = 1; i < input.length(); i++) {
-                if (vowels.indexOf(vowels.charAt(i)) == -1) {
+                if (vowels.indexOf(input.charAt(i)) == -1) {
                     endIndex++;
                 } else {
-                    continue;
+                    break;
                 } 
             }
-            result = input.substring(endIndex+1, input.length()-1) + input.substring(0,endIndex) + "ay";
+            result = input.substring(endIndex, input.length()) + input.substring(0,endIndex) + "ay";
+            System.out.println(result);
         }
         return result;
     }
