@@ -27,12 +27,15 @@ public class PigLatinTranslator {
     }
 
     private static String translateWord(String input) {
+        String result;
+        int endIndex = 0;
+        String vowels = "aeiouyAEIOUY";
         System.out.println("  -> translateWord('" + input + "')");
-
 
         // TODO: Replace this code to correctly translate a single word.
         // Start here first!
         // This is the first place to work.
+        /*
         boolean startWithe = input.substring(0,1).equals("e");
         boolean startWithE = input.substring(0,1).equals("E");
         boolean startWitha = input.substring(0,1).equals("a");
@@ -44,20 +47,28 @@ public class PigLatinTranslator {
         boolean startWithu = input.substring(0,1).equals("u");
         boolean startWithU = input.substring(0,1).equals("U");
 
-
-        //private boolean isVowel(c) {
-
-        //}
         if (startWitha == true || startWithA == true || startWithe == true || startWithE == true || startWithi == true || startWithI == true || startWitho == true || startWithO == true || startWithu == true || startWithU == true) {
-            return input + "ay";
+            result = input + "ay";
         }
         else {
-            for (int i = 0; i < input.length(); i++) {
-                input.charAt(i);
+            for (int i = 1; i < input.length(); i++) {
+                
             }
         }
-        
-        String result = input;
+        */
+        if (vowels.indexOf(input.substring(0,1)) != -1) {
+            result = input + "ay";
+        }
+        else {
+            for (int i = 1; i < input.length(); i++) {
+                if (vowels.indexOf(vowels.charAt(i)) == -1) {
+                    endIndex++;
+                } else {
+                    continue;
+                } 
+            }
+            result = input.substring(endIndex+1, input.length()-1) + input.substring(0,endIndex) + "ay";
+        }
         return result;
     }
 
