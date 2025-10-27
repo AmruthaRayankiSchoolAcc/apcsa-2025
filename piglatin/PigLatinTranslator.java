@@ -30,51 +30,69 @@ public class PigLatinTranslator {
         String result;
         int endIndex = 1;
         String vowels = "aeiouyAEIOUY";
+        String tail = "";
+        char period = '.';
+        char space = ' ';
+        int periodIndex = 0;
+
         System.out.println("  -> translateWord('" + input + "')");
 
-        // TODO: Replace this code to correctly translate a single word.
-        // Start here first!
+        // TODO: Replace this code to correctly translate a single word
         // This is the first place to work.
-        /*
-        boolean startWithe = input.substring(0,1).equals("e");
-        boolean startWithE = input.substring(0,1).equals("E");
-        boolean startWitha = input.substring(0,1).equals("a");
-        boolean startWithA = input.substring(0,1).equals("A");
-        boolean startWithi = input.substring(0,1).equals("i");
-        boolean startWithI = input.substring(0,1).equals("I");
-        boolean startWitho = input.substring(0,1).equals("o");
-        boolean startWithO = input.substring(0,1).equals("O");
-        boolean startWithu = input.substring(0,1).equals("u");
-        boolean startWithU = input.substring(0,1).equals("U");
-
-        if (startWitha == true || startWithA == true || startWithe == true || startWithE == true || startWithi == true || startWithI == true || startWitho == true || startWithO == true || startWithu == true || startWithU == true) {
-            result = input + "ay";
-        }
-        else {
-            for (int i = 1; i < input.length(); i++) {
-                
-            }
-        }
-        */
         if (vowels.indexOf(input.substring(0,1)) != -1) {
-            result = input + "ay";
+            return input + "ay" + tail;
         }
         else {
-            for (int i = 1; i < input.length(); i++) {
-                if (vowels.indexOf(input.charAt(i)) == -1) {
+            for (int i = 0; i < input.length(); i++) {
+                if (input.charAt(i) == period) {
+                        tail = input.substring(i);
+                        periodIndex = input.indexOf(i);
+                        break;
+                }
+            }
+            String newInput = input.replace(input.charAt(periodIndex), space);
+            for (int i = 1; i < newInput.length(); i++) {
+                if (vowels.indexOf(newInput.charAt(i)) == -1) {
                     endIndex++;
                 } else {
                     break;
-                } 
+                }
             }
-            result = input.substring(endIndex, input.length()) + input.substring(0,endIndex) + "ay";
-            System.out.println(result);
-        }
-        return result;
+            if (isCapital(input.substring(0,1))) {
+                        String nonVowelString = lowercase(input.substring(0,1)) + input.substring(1, endIndex);
+                        String startVowelString = capitilize(input.substring(endIndex,endIndex+1)) + input.substring(endIndex+1, input.length());
+                        return startVowelString + nonVowelString + "ay" + tail;
+            } else {
+                return input.substring(endIndex, input.length()) + input.substring(0, endIndex) + "ay" + tail;
+            }
+            //result = startVowelString + nonVowelString + "ay";
+            //result = input.substring(endIndex, input.length()) + input.substring(0, endIndex) + "ay";
     }
+}
 
     // Add additonal private methods here.
     // For example, I had one like this:
-    // private static String capitalizeFirstLetter(String input)
+    private static boolean isCapital(String input) {
+        if (input.length() == 0) {
+            return false;
+        } else if (input.substring(0,1).toUpperCase().equals(input.substring(0,1))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private static String capitilize(String input) {
+        if (input.length() != 0) {
+            return input.substring(0,1).toUpperCase();
+        }
+        return input;
+    }
+    private static String lowercase(String input) {
+        if (input.length() != 0) {
+            return input.substring(0,1).toLowerCase();
+        }
+        return input;
+    }
+
 
 }
