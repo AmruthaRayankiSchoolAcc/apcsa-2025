@@ -29,19 +29,24 @@ public class App {
         if (score > 4)
         {
             // Starter book
-            Book input = new Book();
+            Book finalInput = new Book();
 
             // Start with a "test" book based on a string.
             // Get this to work, and all the tests to pass first.
-            input.readFromString("TestBook", "Dog\nCat\nMouse");
-
-            // Example reading from a URL
-           // input.readFromUrl("Romeo and Juliette", "https://gutenberg.pglaf.org/cache/epub/1513/pg1513.txt");
-
+            /*input.readFromString("TestBook", "Dog\nCat\nMouse");
             input.printlines(0,2);
             Book output = PigLatinTranslator.translate(input);
             output.printlines(0,2);
-            output.writeToFile("test.txt");
+            output.writeToFile("test.txt"); */
+
+            // Example reading from a URL
+            //finalInput.readFromUrl("Romeo and Juliette", "https://gutenberg.pglaf.org/cache/epub/1513/pg1513.txt");
+            finalInput.readFromUrl("Catherine the Great", "https://www.gutenberg.org/cache/epub/77133/pg77133.txt");
+
+            finalInput.printlines(0,finalInput.getLineCount());
+            Book output = PigLatinTranslator.translate(finalInput);
+            output.printlines(0,finalInput.getLineCount());
+            output.writeToFile("output2.txt");
         }
     }
 }
