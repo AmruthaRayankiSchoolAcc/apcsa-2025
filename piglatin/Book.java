@@ -52,6 +52,12 @@ public class Book {
 
         // TODO: use Scanner to populate the book
         // use: text.add(line) to add a line to the book.
+        Scanner sc2 = new Scanner(string);
+        while (sc2.hasNextLine()) {
+            text.add(sc2.nextLine());
+        }
+        sc2.close();
+
     }
 
     public void readFromUrl(String title, String url) {
@@ -64,7 +70,12 @@ public class Book {
             // TODO: use Scanner to populate the book
             // Scanner can open a file on a URL like this:
             // Scanner(bookUrl.openStream())
+            Scanner sc3 = new Scanner(bookUrl.openStream());
             // use: text.add(line) to add a line to the book.
+            while (sc3.hasNextLine()) {
+                text.add(sc3.nextLine());
+            }
+            sc3.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -73,5 +84,15 @@ public class Book {
     void writeToFile(String name) {
         // TODO: Add code here to write the contents of the book to a file.
         // Must write to file using provided name.
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(title + ".txt", true))) {
+            for (int i = 0; i < getLineCount(); i++) {
+                writer.write(getLine(i));
+                writer.newLine();
+            }
+            writer.close();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

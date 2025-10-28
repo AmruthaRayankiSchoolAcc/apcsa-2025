@@ -18,7 +18,7 @@ public class PigLatinTranslator {
     }
 
     public static String translate(String input) {
-        System.out.println("  -> translate('" + input + "')");
+        //System.out.println("  -> translate('" + input + "')");
         String result = "";
         Scanner sc1 = new Scanner(input);
 
@@ -36,7 +36,7 @@ public class PigLatinTranslator {
     }
 
     private static String translateWord(String input) {
-        System.out.println("  -> translateWord('" + input + "')");
+        //System.out.println("  -> translateWord('" + input + "')");
 
         int endIndex = 0;
         String vowels = "aeiouyAEIOUY";
