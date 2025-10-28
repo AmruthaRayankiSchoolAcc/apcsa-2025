@@ -9,7 +9,9 @@ public class PigLatinTranslator {
         // input book.
         // Curent do-nothing code will return an empty book.
         // Your code will need to call translate(String input) many times.
-        
+        for (int i = 0; i < input.getLineCount(); i++) {
+            translatedBook.appendLine(translate(input.getLine(i)));
+        }
 
         return translatedBook;
     }
@@ -28,6 +30,9 @@ public class PigLatinTranslator {
             String word = sc1.next();
             wordCount++;
             result += translateWord(word);
+            if (sc1.hasNext()) {
+                result += " ";
+            }
         }
         sc1.close();
         //result = translateWord(input);
@@ -36,25 +41,26 @@ public class PigLatinTranslator {
     }
 
     private static String translateWord(String input) {
+        System.out.println("  -> translateWord('" + input + "')");
+
         int endIndex = 1;
         String vowels = "aeiouyAEIOUY";
         String tail = "";
-        char period = '.';
+        String punct = ".,;:?!]}[{*#_$%@!&^()~`/|<>-+=";
         char space = ' ';
         int periodIndex = 0;
 
-        System.out.println("  -> translateWord('" + input + "')");
-
-        // TODO: Replace this code to correctly translate a single word
-        // This is the first place to work.
+        if (input.length() == 0 || input.charAt(0) == ' ') {
+            return "";
+        }
         if (vowels.indexOf(input.substring(0,1)) != -1) {
             return input + "ay" + tail;
         }
         else {
             for (int i = 0; i < input.length(); i++) {
-                if (input.charAt(i) == period) {
+                if (punct.indexOf(input.charAt(i)) != -1) {
                         tail = input.substring(i);
-                        periodIndex = input.indexOf(i);
+                        periodIndex = i;
                         break;
                 }
             }
