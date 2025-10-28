@@ -9,75 +9,71 @@ public class PigLatinTranslator {
         // input book.
         // Curent do-nothing code will return an empty book.
         // Your code will need to call translate(String input) many times.
+        String testTitle = translate(input.getTitle());
+        translatedBook.setTitle(testTitle);
         for (int i = 0; i < input.getLineCount(); i++) {
             translatedBook.appendLine(translate(input.getLine(i)));
         }
-
         return translatedBook;
     }
 
     public static String translate(String input) {
         System.out.println("  -> translate('" + input + "')");
         String result = "";
-        int wordCount = 0;
         Scanner sc1 = new Scanner(input);
 
         // TODO: translate a string input, store in result.
-        // The input to this function could be any English string.
-        // It may be made up of many words.
         // This method must call translateWord once for each word in the string.
         while (sc1.hasNext()) {
             String word = sc1.next();
-            wordCount++;
             result += translateWord(word);
             if (sc1.hasNext()) {
                 result += " ";
             }
         }
         sc1.close();
-        //result = translateWord(input);
-
         return result;
     }
 
     private static String translateWord(String input) {
         System.out.println("  -> translateWord('" + input + "')");
 
-        int endIndex = 1;
+        int endIndex = 0;
         String vowels = "aeiouyAEIOUY";
         String tail = "";
-        String punct = ".,;:?!]}[{*#_$%@!&^()~`/|<>-+=";
-        char space = ' ';
-        int periodIndex = 0;
+        char period = '.';
+        String newInput = input;
 
         if (input.length() == 0 || input.charAt(0) == ' ') {
             return "";
         }
+        if (newInput.charAt(newInput.length() - 1) == period) {
+            tail = ".";
+            //then remove the last period
+            newInput = newInput.substring(0,newInput.length()-1);
+        }
         if (vowels.indexOf(input.substring(0,1)) != -1) {
-            return input + "ay" + tail;
+            return input + "ay";
         }
         else {
-            for (int i = 0; i < input.length(); i++) {
-                if (punct.indexOf(input.charAt(i)) != -1) {
-                        tail = input.substring(i);
-                        periodIndex = i;
-                        break;
-                }
-            }
-            String newInput = input.replace(input.charAt(periodIndex), space);
-            for (int i = 1; i < newInput.length(); i++) {
+            for (int i = 0; i < newInput.length(); i++) {
                 if (vowels.indexOf(newInput.charAt(i)) == -1) {
                     endIndex++;
                 } else {
                     break;
                 }
             }
-            if (isCapital(input.substring(0,1))) {
-                        String nonVowelString = lowercase(input.substring(0,1)) + input.substring(1, endIndex);
-                        String startVowelString = capitilize(input.substring(endIndex,endIndex+1)) + input.substring(endIndex+1, input.length());
+            String startVowelString = "";
+            if (isCapital(newInput.substring(0,1))) {
+                        String nonVowelString = lowercase(newInput.substring(0,1)) + newInput.substring(1, endIndex);
+                        if (endIndex < newInput.length()) {
+                            startVowelString = capitilize(newInput.substring(endIndex,endIndex+1)) + newInput.substring(endIndex+1);
+                        } else {
+                            startVowelString = "";
+                        }
                         return startVowelString + nonVowelString + "ay" + tail;
             } else {
-                return input.substring(endIndex, input.length()) + input.substring(0, endIndex) + "ay" + tail;
+                return newInput.substring(endIndex, newInput.length()) + newInput.substring(0, endIndex) + "ay" + tail;
             }
             //result = startVowelString + nonVowelString + "ay";
             //result = input.substring(endIndex, input.length()) + input.substring(0, endIndex) + "ay";
