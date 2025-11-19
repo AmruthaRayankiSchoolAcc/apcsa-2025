@@ -34,8 +34,13 @@ public class Hand {
         return hand.remove(card);
     }
 
-    // toString method prints out
+    // toString method prints out all the cards
     public String toString() {
-        return "Number of cards in hand: " + hand.size();
+        String output = "";
+        for (int i = 0; i < hand.size(); i++) {
+            output += hand.get(i);
+            output += "";
+        }
+        return output.substring(0, output.length()-1);
     }
 }
