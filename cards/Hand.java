@@ -24,8 +24,18 @@ public class Hand {
         return count;
     }
 
-    // 
+    // get method returns one card
     public Card get(int card) {
         return hand.get(card);
+    }
+
+    //remove method removes a card
+    public Card remove(int card) {
+        return hand.remove(card);
+    }
+
+    // toString method prints out
+    public String toString() {
+        return "Number of cards in hand: " + hand.size();
     }
 }
