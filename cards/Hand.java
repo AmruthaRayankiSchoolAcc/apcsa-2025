@@ -16,7 +16,7 @@ public class Hand {
             hand.add(card);
             count++;
         }
-        //System.out.println("No more cards can be added");
+        //System.out.println("No more cards can be added.");
     }
 
     //length method: returns the number of cards in Hand 
