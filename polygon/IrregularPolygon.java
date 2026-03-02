@@ -19,7 +19,16 @@ public class IrregularPolygon {
 
     public double perimeter() {
         // TODO: Calculate the perimeter.
-        return 3.14;
+        double perimeter = 0.0;
+        for (int i = 0; i < myPolygon.size()-1; i++) {
+            double x = myPolygon.get(i).getX() - myPolygon.get(i+1).getX();
+            double y = myPolygon.get(i).getY() - myPolygon.get(i+1).getY();
+            perimeter += Math.sqrt((x*x + y*y));
+        }
+        double x = myPolygon.get(myPolygon.size() - 1).getX() - myPolygon.get(0).getX();
+        double y = myPolygon.get(myPolygon.size() - 1).getY() - myPolygon.get(0).getY();
+        perimeter += Math.sqrt((x*x + y*y));
+        return perimeter;
     }
 
     public double area() {
