@@ -33,11 +33,18 @@ public class IrregularPolygon {
 
     public double area() {
         // TODO: Calculate the area.
-        Double area = 0.0;
         if (myPolygon.size() > 2) {
-            
+            return 0.0;
         }
-        return area;
+        double sum1 = 0.0; 
+        double sum2 = 0.0;
+        for (int i = 0; i < myPolygon.size(); i++) {
+            Point2D.Double current = myPolygon.get(i);
+            Point2D.Double next = myPolygon.get((i+1) % myPolygon.size());
+            sum1 += current.x * next.y;
+            sum2 += current.y * next.x;
+        }
+        return 0.5 * Math.abs(sum1-sum2);
     }
 
     public void draw()
@@ -45,6 +52,24 @@ public class IrregularPolygon {
         // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
         try {
             // TODO: Draw the polygon.
+            if (myPolygon.size() < 2) {
+                return; 
+            }
+
+            DrawingTool pen = new DrawingTool(new SketchPad(500, 500));
+            pen.up();
+
+            Point2D.Double first = myPolygon.get(0);
+            pen.move(first.getX(), first.getY());
+            pen.down();
+
+            for (int i = 1; i<=myPolygon.size()-1; i++) {
+                Point2D.Double next = myPolygon.get(i);
+                pen.move(next.x, next.y);
+            }
+             
+            pen.move(first.x, first.y);
+            pen.up();
             // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
             //DrawingTool myDrawingTool = new DrawingTool(new SketchPad(500, 500));
             //myDrawingTool.move(50, 50);
