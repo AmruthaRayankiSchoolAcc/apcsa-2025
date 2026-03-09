@@ -20,62 +20,57 @@ public class IrregularPolygon {
     public double perimeter() {
         // TODO: Calculate the perimeter.
         double perimeter = 0.0;
-        for (int i = 0; i < myPolygon.size()-1; i++) {
-            double xdif = myPolygon.get(i).getX() - myPolygon.get(i+1).getX();
-            double ydif = myPolygon.get(i).getY() - myPolygon.get(i+1).getY();
-            perimeter += Math.sqrt((xdif*xdif + ydif*ydif));
+        int points = myPolygon.size();
+
+        if (points < 2) return 0.0;
+
+        for (int i = 0; i < points; i++) {
+            Point2D.Double current = myPolygon.get(i);
+            Point2D.Double next = myPolygon.get((i + 1) % points); // Connects last back to first
+            
+            perimeter += current.distance(next);
         }
-        double x = myPolygon.get(myPolygon.size() - 1).getX() - myPolygon.get(0).getX();
-        double y = myPolygon.get(myPolygon.size() - 1).getY() - myPolygon.get(0).getY();
-        perimeter += Math.sqrt((x*x + y*y));
+        
         return perimeter;
     }
 
     public double area() {
         // TODO: Calculate the area.
-        if (myPolygon.size() > 2) {
-            return 0.0;
+        double area = 0.0;
+        int points = myPolygon.size();
+        
+        if (points < 3) { 
+            return 0.0; 
         }
-        double sum1 = 0.0; 
-        double sum2 = 0.0;
-        for (int i = 0; i < myPolygon.size(); i++) {
-            Point2D.Double current = myPolygon.get(i);
-            Point2D.Double next = myPolygon.get((i+1) % myPolygon.size());
-            sum1 += current.x * next.y;
-            sum2 += current.y * next.x;
+
+        for (int i = 0; i < points; i++) {
+            Point2D.Double p1 = myPolygon.get(i);
+            Point2D.Double p2 = myPolygon.get((i + 1) % points);
+            
+            // Use getter methods instead of .x and .y
+            area += (p1.getX() * p2.getY()) - (p1.getY() * p2.getX());
         }
-        return 0.5 * Math.abs(sum1-sum2);
+
+        return Math.abs(area / 2.0);
     }
 
-    public void draw()
-    {
-        // Wrap the DrawingTool in a try/catch to allow development without need for graphics.
-        try {
-            // TODO: Draw the polygon.
-            if (myPolygon.size() < 2) {
-                return; 
-            }
+    public void draw() {
+        if (myPolygon.size() < 2) return;
 
-            DrawingTool pen = new DrawingTool(new SketchPad(500, 500));
-            pen.up();
+        DrawingTool pen = new DrawingTool(); // Or use your class instance
+        Point2D.Double firstPoint = myPolygon.get(0);
+        
+        pen.up();
+        pen.move(firstPoint.getX(), firstPoint.getY());
+        pen.down();
 
-            Point2D.Double first = myPolygon.get(0);
-            pen.move(first.getX(), first.getY());
-            pen.down();
-
-            for (int i = 1; i<=myPolygon.size()-1; i++) {
-                Point2D.Double next = myPolygon.get(i);
-                pen.move(next.x, next.y);
-            }
-             
-            pen.move(first.x, first.y);
-            pen.up();
-            // Documents: https://pavao.org/compsci/gpdraw/html/gpdraw/DrawingTool.html
-            //DrawingTool myDrawingTool = new DrawingTool(new SketchPad(500, 500));
-            //myDrawingTool.move(50, 50);
-        } catch (java.awt.HeadlessException e) {
-            System.out.println("Exception: No graphics support available.");
+        for (int i = 1; i < myPolygon.size(); i++) {
+            Point2D.Double nextPoint = myPolygon.get(i);
+            pen.move(nextPoint.getX(), nextPoint.getY());
         }
+
+        // Close the polygon by moving back to the start
+        pen.move(firstPoint.getX(), firstPoint.getY());
     }
 
 }
